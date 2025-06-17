@@ -6,7 +6,6 @@ if (isset($_SESSION['auth']) == 1) {
 
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" href="/favicon.png">
     <title>COSC 4806</title>
     <meta charset="UTF-8">

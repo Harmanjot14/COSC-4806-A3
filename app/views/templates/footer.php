@@ -1,4 +1,4 @@
-<link rel = "stylesheet" href = "/css/style.css">
+
 <footer class="footer">    
     <div class="row">
             <p>Copyright &copy; <?php echo date('Y'); ?> </p>
