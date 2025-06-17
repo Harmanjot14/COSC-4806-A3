@@ -6,7 +6,7 @@
   <div class="page-header" id="banner">
       <div class="row">
         <div>
-           <h1>Login Forum</h1>
+           <h1>Login</h1>
         </div>
        </div>
   </div>
