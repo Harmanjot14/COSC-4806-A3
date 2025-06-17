@@ -3,12 +3,14 @@
   <head>
     <title>Sign Up</title>
   </head>
-  <body>  
+  <body>    
+    <?php 
+      session_start();
+      unset($_SESSION['error']);
+      unset($_SESSION['success']);
+    ?>
+    
     <h1>Sign Up</h1>
-    <?php if (isset($_SESSION['error'])): ?>
-      <p style="color: red;"><?php echo $_SESSION['error']; ?></p>
-    <?php endif;
-    ?> 
     <form method="post" action="/create/save">
       <label for="username">Username:</label>
       <br>
@@ -24,5 +26,15 @@
       <br><br>
       <input type="submit" value="Sign Up">
     </form>
+    
+    <?php if (isset($_SESSION['error'])): ?>
+      <p style="color: red;"><?php echo $_SESSION['error']; ?></p>
+    <?php endif;
+    ?> 
+    <?php if (isset($_SESSION['success'])): ?>
+      <p style="color: green;"><?php echo $_SESSION['success']; ?></p>
+    <?php endif;
+    ?> 
+    
   </body>  
 </html>
