@@ -24,18 +24,21 @@
         <input type="password" id="confirm_password" name="confirm_password" required>
         <br><br>
         <button type="submit" value="Sign Up">Sign Up</button>
+        <br>
       </form>
+      
+      <?php if (isset($_SESSION['error'])): ?>
+        <p style="color: red;"><?php echo $_SESSION['error']; ?></p>
+        <?php unset($_SESSION['error']);?>
+      <?php endif;?>
+
+      <?php if (isset($_SESSION['success'])): ?>
+        <p style="color: green;"><?php echo $_SESSION['success']; ?></p>
+        <?php unset($_SESSION['success']);?>
+      <?php endif;?> 
     </div>
     
-    <?php if (isset($_SESSION['error'])): ?>
-      <p style="color: red;"><?php echo $_SESSION['error']; ?></p>
-      <?php unset($_SESSION['error']);?>
-    <?php endif;?>
     
-    <?php if (isset($_SESSION['success'])): ?>
-      <p style="color: green;"><?php echo $_SESSION['success']; ?></p>
-      <?php unset($_SESSION['success']);?>
-    <?php endif;?> 
     
   </body>  
 </html>
