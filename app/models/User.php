@@ -57,16 +57,21 @@ Class User {
       return "Username already exists";
     }
     /*validate password is at least 10 characters*/
-    if (strlen($password) < 10 || !preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password))
-      return "Password must be at least 10 characters, contain at least one uppercase letter and one lowercase letter";
-  
+    if (strlen($password) < 10 || !preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password)){
+      $_SESSION['error'] = "Password must be at least 10 characters, contain at least one uppercase letter and one lowercase letter";
+      header('Location: /create/index');
+      exit;
+    }
+      
     /*hashed password*/
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
   
     /*create a new user*/
     $statement = $db->prepare("INSERT INTO users (username, password) VALUES (:username, :password);");
     $statement->execute(['username' => $username, 'password' => $hashedPassword]);
-    return "Username and Password created successfully";
+    $_SESSION['success'] = "Username and Password created successfully";
+     header('Location: /create/index');
+     exit;
   }
 
 }
