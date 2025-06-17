@@ -67,6 +67,9 @@ Class User {
          $_SESSION['lockout'] = time() + 60;
          $_SESSION['error'] = "You have been locked out for 60 seconds, Please try again later";
        }
+       else{
+         $_SESSION['error'] = "Invalid username or password";
+       }
   			header('Location: /login');
   			die;
   		}
