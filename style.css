@@ -4,6 +4,11 @@ body{
   margin: 0;
   padding: 0;
 }
+/*for home/index.php*/
+.home{
+    margin: 0;
+    padding: 10px;
+}
 /*Navigation bar*/
 .navbar{
     background-color: lightgray;
@@ -46,6 +51,13 @@ body{
   left: 0;
   width: 180px;
   list-style: none;
+}
+.dropdown-toggle::after{
+    content: '\25BC';;
+    font-size: 10px;
+    margin-left: 2px;
+    position: relative;
+    top: -2px;
 }
 
 /*For footer*/
