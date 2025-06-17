@@ -4,6 +4,7 @@ body{
   margin: 0;
   padding: 0;
 }
+/*Navigation bar*/
 .navbar{
     background-color: lightgray;
     margin: 0;
@@ -46,6 +47,26 @@ body{
   width: 180px;
   list-style: none;
 }
+
+/*For footer*/
 .footer{
   color: gray;  
 } 
+
+/*Login page*/
+.login-container{
+    margin: 20px;
+    padding: 0;
+  
+}
+.login-container button{
+    background-color: #007BFF;
+    color: white;
+    font-size: 14px;;
+    border: none;
+    width: 20%;
+    height: 30px;
+    border-radius: 3px;
+}
+
+/*Sign up page*/
