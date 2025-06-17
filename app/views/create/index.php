@@ -3,11 +3,9 @@
   <head>
     <title>Sign Up</title>
   </head>
-  <body>    
-    <?php 
+  <body>        
+    <?php
       session_start();
-      unset($_SESSION['error']);
-      unset($_SESSION['success']);
     ?>
     
     <h1>Sign Up</h1>
@@ -29,12 +27,13 @@
     
     <?php if (isset($_SESSION['error'])): ?>
       <p style="color: red;"><?php echo $_SESSION['error']; ?></p>
-    <?php endif;
-    ?> 
+      <?php unset($_SESSION['error']);?>
+    <?php endif;?>
+    
     <?php if (isset($_SESSION['success'])): ?>
       <p style="color: green;"><?php echo $_SESSION['success']; ?></p>
-    <?php endif;
-    ?> 
+      <?php unset($_SESSION['success']);?>
+    <?php endif;?> 
     
   </body>  
 </html>
