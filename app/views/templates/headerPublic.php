@@ -12,5 +12,7 @@ if (isset($_SESSION['auth']) == 1) {
     <meta name="viewport" content="width=device-width">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <!-- Added CSS style -->
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
