@@ -17,12 +17,14 @@ Class User {
     $rows = $statement->fetch(PDO::FETCH_ASSOC);
     return $rows;
   }
-  /*to log login attempts to the database*/
+
+  /*to log all the login attempts to the database*/
   public function login_attempts($username, $status){
     $db = db_connect();
     $statement = $db->prepare("INSERT INTO login_attempts (username, status, time) VALUES (:username, :status, NOW());");
     $statement->execute(['username' => $username, 'status' => $status]);
   }
+
 
   public function authenticate($username, $password) {
   	$username = strtolower($username);
@@ -32,8 +34,13 @@ Class User {
     $statement->execute();
     $rows = $statement->fetch(PDO::FETCH_ASSOC);
 
-    /*lockout message for user*/
-    if(isset($_SESSION['lockout_time']) && $_SESSION['lockout_time'] > time()){
+    /*unset lockout after 60sec*/
+    if(isset($_SESSION['lockout']) && $_SESSION['lockout'] <= time()){
+      unset($_SESSION['lockout']);
+      unset($_SESSION['failedAuth']);
+    }
+    /*lockout for 60 seconds*/
+    if(isset($_SESSION['lockout']) && $_SESSION['lockout'] > time()){
       $_SESSION['error'] = "You have been locked out for 60 seconds, Please try again later";
       header('Location: /login');
       exit;
@@ -54,13 +61,12 @@ Class User {
   				$_SESSION['failedAuth'] = 1;
   			}
         /*Added login_attempt bad in table after failed login*/
-        $this->login_attempts($username, 'Bad');
-
-        /*if 3 failed attempts, then it will lockout for 60sec*/
-        if($_SESSION['failedAuth'] > 3){
-          $_SESSION['lockout_time'] = time() + 60; 
-          //echo "You have been locked out for 60 seconds, Please try again later";
-        }
+       $this->login_attempts($username, 'Bad');
+      
+       if($_SESSION['failedAuth'] >= 3){
+         $_SESSION['lockout'] = time() + 60;
+         $_SESSION['error'] = "You have been locked out for 60 seconds, Please try again later";
+       }
   			header('Location: /login');
   			die;
   		}
