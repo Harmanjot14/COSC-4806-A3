@@ -5,6 +5,10 @@
   </head>
   <body>  
     <h1>Sign Up</h1>
+    <?php if (isset($_SESSION['error'])): ?>
+      <p style="color: red;"><?php echo $_SESSION['error']; ?></p>
+    <?php endif;
+    ?> 
     <form method="post" action="/create/save">
       <label for="username">Username:</label>
       <br>
@@ -20,10 +24,5 @@
       <br><br>
       <input type="submit" value="Sign Up">
     </form>
-
-    <!__<?php if ($result): ?>
-      <p><?php echo $result; ?></p>
-    <?php endif;  ?> 
-
   </body>  
 </html>
