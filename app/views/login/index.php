@@ -1,4 +1,7 @@
 <?php require_once 'app/views/templates/headerPublic.php'?>
+
+<?php session_start(); ?>
+
 <main role="main" class="container">
     <div class="page-header" id="banner">
         <div class="row">
@@ -28,3 +31,8 @@
 	</div>
 </div>
     <?php require_once 'app/views/templates/footer.php' ?>
+	
+	<?php if (isset($_SESSION['error'])): ?>
+		<p style="color: red;"><?php echo $_SESSION['error']; ?></p>
+		<?php unset($_SESSION['error']);?>
+	<?php endif;?>
