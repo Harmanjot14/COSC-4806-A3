@@ -2,28 +2,30 @@
 <html>
   <head>
     <title>Sign Up</title>
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>        
     <?php
       session_start();
     ?>
-    
-    <h1>Sign Up</h1>
-    <form method="post" action="/create/save">
-      <label for="username">Username:</label>
-      <br>
-      <input type="text" id="username" name="username" required>
-      <br>
-      <label for="password">Password:</label>
-      <br>
-      <input type="password" id="password" name="password" required>
-      <br>
-      <label for="confirm_password">Confirm Password:</label>
-      <br>
-      <input type="password" id="confirm_password" name="confirm_password" required>
-      <br><br>
-      <input type="submit" value="Sign Up">
-    </form>
+    <div class="signup">
+      <h1>Sign Up</h1>
+      <form method="post" action="/create/save">
+        <label for="username">Username:</label>
+        <br>
+        <input type="text" id="username" name="username" required>
+        <br><br>
+        <label for="password">Password:</label>
+        <br>
+        <input type="password" id="password" name="password" required>
+        <br><br>
+        <label for="confirm_password">Confirm Password:</label>
+        <br>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+        <br><br>
+        <button type="submit" value="Sign Up">Sign Up</button>
+      </form>
+    </div>
     
     <?php if (isset($_SESSION['error'])): ?>
       <p style="color: red;"><?php echo $_SESSION['error']; ?></p>
