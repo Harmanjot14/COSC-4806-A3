@@ -32,6 +32,12 @@ Class User {
     $statement->execute();
     $rows = $statement->fetch(PDO::FETCH_ASSOC);
 
+    /*lockout message for user*/
+    if(isset($_SESSION['lockout_time']) && $_SESSION['lockout_time'] > time()){
+      $_SESSION['error'] = "You have been locked out for 60 seconds, Please try again later";
+      header('Location: /login');
+      exit;
+    }
     
     if (password_verify($password, $rows['password'])) {
     	$_SESSION['auth'] = 1;
@@ -49,10 +55,17 @@ Class User {
   			}
         /*Added login_attempt bad in table after failed login*/
         $this->login_attempts($username, 'Bad');
+
+        /*if 3 failed attempts, then it will lockout for 60sec*/
+        if($_SESSION['failedAuth'] > 3){
+          $_SESSION['lockout_time'] = time() + 60; 
+          //echo "You have been locked out for 60 seconds, Please try again later";
+        }
   			header('Location: /login');
   			die;
   		}
     }
+
   /* to create a new user*/
   public function create_user($username, $password){
     $db = db_connect();
