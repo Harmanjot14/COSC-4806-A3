@@ -67,6 +67,6 @@ Class User {
     $statement = $db->prepare("INSERT INTO users (username, password) VALUES (:username, :password);");
     $statement->execute(['username' => $username, 'password' => $hashedPassword]);
     return "Username and Password created successfully";
-}
+  }
 
 }
