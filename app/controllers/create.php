@@ -25,7 +25,10 @@ class Create extends Controller {
           $result = $user->create_user($username, $password);
           if ($result == "Username and Password created successfully"){
             $_SESSION['failed_attempts'] = 0;
-            header('Location: /login');
+            $_SESSION['success'] = "Username and Password created successfully <br> <a href='/login'>Go to Login Page</a>";
+              
+            header('Location: /create/index');
+            return;
           }
           else{
             $_SESSION['error'] = $result;
