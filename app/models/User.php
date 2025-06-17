@@ -17,23 +17,28 @@ Class User {
     $rows = $statement->fetch(PDO::FETCH_ASSOC);
     return $rows;
   }
+  /*to log login attempts to the database*/
+  public function login_attempts($username, $status){
+    $db = db_connect();
+    $statement = $db->prepare("INSERT INTO login_attempts (username, status, time) VALUES (:username, :status, NOW());");
+    $statement->execute(['username' => $username, 'status' => $status]);
+  }
 
   public function authenticate($username, $password) {
-      /*
-       * if username and password good then
-       * $this->auth = true;
-      */
   	$username = strtolower($username);
   	$db = db_connect();
     $statement = $db->prepare("select * from users WHERE username = :name;");
     $statement->bindValue(':name', $username);
     $statement->execute();
     $rows = $statement->fetch(PDO::FETCH_ASSOC);
-  		
+
+    
     if (password_verify($password, $rows['password'])) {
     	$_SESSION['auth'] = 1;
     	$_SESSION['username'] = ucwords($username);
     	unset($_SESSION['failedAuth']);
+      /*Added login_attempt good in table after succesful login*/
+      $this->login_attempts($username, 'Good');
     	header('Location: /home');
     	die;
   	} else {
@@ -42,6 +47,8 @@ Class User {
   			} else {
   				$_SESSION['failedAuth'] = 1;
   			}
+        /*Added login_attempt bad in table after failed login*/
+        $this->login_attempts($username, 'Bad');
   			header('Location: /login');
   			die;
   		}
